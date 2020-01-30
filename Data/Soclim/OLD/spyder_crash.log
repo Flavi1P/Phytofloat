@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/spyderlib/spyder.py", line 2346, in main
+    mainwindow = run_spyder(app, options, args)
+  File "/usr/lib/python2.7/dist-packages/spyderlib/spyder.py", line 2234, in run_spyder
+    main.setup()
+  File "/usr/lib/python2.7/dist-packages/spyderlib/spyder.py", line 769, in setup
+    from spyderlib.plugins.console import Console
+  File "/usr/lib/python2.7/dist-packages/spyderlib/plugins/console.py", line 30, in <module>
+    from spyderlib.utils.environ import EnvDialog
+  File "/usr/lib/python2.7/dist-packages/spyderlib/utils/environ.py", line 17, in <module>
+    from spyderlib.widgets.dicteditor import DictEditor
+  File "/usr/lib/python2.7/dist-packages/spyderlib/widgets/dicteditor.py", line 40, in <module>
+    from spyderlib.widgets.dicteditorutils import (sort_against, get_size,
+  File "/usr/lib/python2.7/dist-packages/spyderlib/widgets/dicteditorutils.py", line 37, in <module>
+    required_version=PANDAS_REQVER)
+  File "/usr/lib/python2.7/dist-packages/spyderlib/dependencies.py", line 68, in add
+    % modname)
+ValueError: Dependency has already been registered: pandas
