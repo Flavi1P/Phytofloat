@@ -38,18 +38,20 @@ DAC  <- uf[4]
 #floats = c('048b')
 #floats = c('049b')
 
+floats <- '049b'
+i <- floats
 
 for (i in floats) {
 print(i)
-bact <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/bact",i,".txt",sep=""),sep = ",")
-bbp <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/bbp",i,".txt",sep=""),sep = ",")
-chl <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/chl",i,".txt",sep=""),sep = ",")
-cp <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/cp",i,".txt",sep=""),sep = ",")
-depth <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/depth",i,".txt",sep=""),sep = ",")[,1]
-diat <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/diat",i,".txt",sep=""),sep = ",")
-nano <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/nano",i,".txt",sep=""),sep = ",")
-pico <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/pico",i,".txt",sep=""),sep = ",")
-time <- read.table(paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/time",i,".txt",sep=""),sep = ",")[,1]
+bact <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/bact",i,".txt",sep=""),sep = ",")
+bbp <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/bbp",i,".txt",sep=""),sep = ",")
+chl <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/chl",i,".txt",sep=""),sep = ",")
+cp <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/cp",i,".txt",sep=""),sep = ",")
+depth <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/depth",i,".txt",sep=""),sep = ",")[,1]
+diat <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/diat",i,".txt",sep=""),sep = ",")
+nano <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/nano",i,".txt",sep=""),sep = ",")
+pico <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/pico",i,".txt",sep=""),sep = ",")
+time <- read.table(paste("Data/Soclim/DATA_TEXT_OUT/time",i,".txt",sep=""),sep = ",")[,1]
 
 
 time <- as.Date(time, origin="01-01-01 00:00:00 UTC")
@@ -66,7 +68,7 @@ cp <- as.double(unlist(cp))
 
 
 #pdf(file= paste("/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/",i,".pdf",sep="")  , width = 2000, height = 2000 )
-jpeg(file= paste("/var/www/oao/bioargo/PHP/AP/REMBAU/V2_",i,".jpeg",sep="")  , width = 2000, height = 2000 )
+jpeg(file= paste("Output/Soclim/Plots/",i,"/",i,".jpeg",sep="")  , width = 2000, height = 2000 )
 
 
 par(mfrow = c(4, 2))  # 3 rows and 2 columns
@@ -90,6 +92,7 @@ depth <-  depth2
 
 
 #for (DATAplot in c("chl")){
+DATAplot1 <- 'chl'
 
 for (DATAplot1 in c("chl","bbp","cp","bact", "pico","nano","diat")){
 print(DATAplot1)
