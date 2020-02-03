@@ -125,7 +125,7 @@ print floats
 for f in np.arange(len(floats)): #For each float
 	print f
 #Open the data
-	datadir = '/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/data/'+floats[f]+'/'
+	datadir = '/home/flavien/Documents/these/Phytofloat/Data/Soclim/data/'+floats[f]+'/'
 	timeD = np.loadtxt(datadir+'TIME.txt',dtype=int, delimiter=',')
 
 	for ff in range(len(timeD)):
