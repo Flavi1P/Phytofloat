@@ -25,14 +25,14 @@ def PLS_plot(pls,ax1,ax2,scalex,scaley,xlab,ylab,colors):
 
 def nonan(data):
 	return data[~np.isnan(data)]
-	
+
 
 #=========================================================================================
 #Open the the microphyto phyto counts data
 #=========================================================================================
 data = np.genfromtxt('data/data_micro.csv',delimiter='\t',dtype='S')
 
-fov = data[1,3:-1].astype('<f8') # Field of view, do not take into account TB1 
+fov = data[1,3:-1].astype('<f8') # Field of view, do not take into account TB1
 counts = data[2:,3:-1].astype('<f8') # Raw counts, do not take into account TB1
 spe = data[2:,1]# Sepcies names, avoid silicoflagellates
 vol = data[2:,2].astype('<f8') # Volume for each species, avoid silicoflagellates
@@ -54,7 +54,7 @@ C_micro[:,0] = 0.117 * (V_micro[:,0]**0.881) # Diatom
 C_micro[:,1] = 0.760 * (V_micro[:,1]**0.819) # Dino
 C_micro[:,2] = 0.216 * (V_micro[:,2]**0.939) # Alloricate Cilliate
 C_micro[:,3] = 0.261 * (V_micro[:,3]**0.860) #  silicoflagellates
-C_micro = C_micro/12/1e6 # Convert pgC to  µmolC
+C_micro = C_micro/12/1e6 # Convert pgC to  ï¿½molC
 
 # Sum Carbon of Dino + CIlliate + Silicoflagellates
 C_diat = C_micro[:,0]
@@ -79,7 +79,7 @@ biovol_cyto = data_cyto[1,2:].astype('<f8')
 carbon_cyto = data_cyto[2,2:].astype('<f8')
 abund_cyto = data_cyto[3:,2:].astype('<f8')*1e3 # Convert cell/mL to cell/L
 V_cyto = abund_cyto*biovol_cyto
-C_cyto = abund_cyto*carbon_cyto/12/1e6 # Convert pgC to  µmolC
+C_cyto = abund_cyto*carbon_cyto/12/1e6 # Convert pgC to  ï¿½molC
 
 #sum all pico (proc+syn+'pico')
 V_bact = V_cyto[:,0] ; V_pico = np.sum(V_cyto[:,1:4],axis=1) ; V_nano = V_cyto[:,-1]
@@ -112,7 +112,7 @@ poc = data[1:,-3].astype('<f8')
 pon = data[1:,-2].astype('<f8')
 data_ctd = data[1:,4:-3].astype('<f8')
 ox_sol = O2sol(data_ctd[:,1],data_ctd[:,2])*1.027 # approximate density -> better use the real one
-ox_sat = (data_ctd[:,3]+11)/ox_sol*100 # Check the CTD calibration ... +11 µmol/L 
+ox_sat = (data_ctd[:,3]+11)/ox_sol*100 # Check the CTD calibration ... +11 ï¿½mol/L
 data_ctd[:,3] = ox_sat # Replace oxygen concentration by oxygen saturation
 
 
@@ -131,7 +131,7 @@ pon = pon[sample_sel]
 
 #Optionnal : Check the corresondance between phyto samples and CTD samples
 for i in np.arange(len(sample_micro)):
-	print sample_micro[i] + ' ' + sample_btl[i] + ' ' + sample_cyto[i]
+	print (ample_micro[i] + ' ' + sample_btl[i] + ' ' + sample_cyto[i])
 
 #=========================================================================================
 # Select data : do not use oxygen saturation !!!
@@ -162,10 +162,10 @@ pls = PLSRegression(n_components=X.shape[1],scale=False).fit(X,Y) # Maximum numb
 B = pls.coefs
 Y_pred = pls.predict(X)
 rsqd_pls = pls.score(X,Y)
-print '\n-----------------------------\nPLS score = ', rsqd_pls
+print('\n-----------------------------\nPLS score = ', rsqd_pls)
 
 # Estimate PLS performance
-print 'PLS results:'
+print ('PLS results:')
 Y_all = np.reshape(Y,Y.size)
 Y_pred_all = np.reshape(Y_pred,Y_pred.size)
 for i in np.arange(len(plank_lab)):
@@ -173,8 +173,8 @@ for i in np.arange(len(plank_lab)):
 	slope, intercept, r_value, p_value, std_err = stats.linregress(Y[:,i],Y_pred[:,i])
 	print plank_lab[i],'slope=',slope,' rsqd=',r_value**2,' pval=',p_value,' rmse=',rmse
 slope, intercept, r_value_all, p_value, std_err = stats.linregress(Y_all,Y_pred_all)
-print 'All pooled','slope=', slope,'rsqd=', r_value_all**2,'pval=', p_value,'rmse=', np.mean((Y_all - Y_pred_all)**2)**0.5
-print '-----------------------------'
+print ('All pooled','slope=', slope,'rsqd=', r_value_all**2,'pval=', p_value,'rmse=', np.mean((Y_all - Y_pred_all)**2)**0.5)
+print ('-----------------------------')
 
 
 #=========================================================================================
@@ -182,7 +182,7 @@ print '-----------------------------'
 fig, ax = plt.subplots(1,2,figsize=(6,3))
 plt.subplots_adjust(top = 0.85,bottom=0.25,wspace=0.7,left=0.12,right=0.95)
 lab = ['$\mathdefault{\%C_{bact}}$','$\mathdefault{\%C_{pico}}$','$\mathdefault{\%C_{nano}}$','$\mathdefault{\%C_{micro}}$']
-# 1: plot the linear correlation coeffs 
+# 1: plot the linear correlation coeffs
 plt.sca(ax[0])
 cplot = ax[0].pcolor(np.flipud(corr),vmin=-1,vmax=1,cmap='RdBu_r')
 cbar = plt.colorbar(cplot,shrink=0.5,aspect=10,ticks=[-1,-0.5,0,0.5,1])
@@ -222,4 +222,3 @@ for i in [0,1]:
 	nice_axes(ax[i])
 ax[0].text(0,9.7,'a',fontsize=12)
 ax[1].text(1e-2,1.5,'b',fontsize=12)
-

@@ -36,6 +36,8 @@ def scale(data):
 	return data   # here the scaling function is the identity function -> no modification of the prediction!
 	# might be usefull for furture application  : retrieve absolute abundance from relative
 
+#set my project wd
+init_path = '/home/flavien/Documents/these/Phytofloat'
 #==============================================================================
 # Perform PLS
 #==============================================================================
@@ -125,7 +127,7 @@ print floats
 for f in np.arange(len(floats)): #For each float
 	print f
 #Open the data
-	datadir = '/home/flavien/Documents/these/Phytofloat/Data/Soclim/data/'+floats[f]+'/'
+	datadir = init_path+'/Data/Soclim/data/'+floats[f]+'/'
 	timeD = np.loadtxt(datadir+'TIME.txt',dtype=int, delimiter=',')
 
 	for ff in range(len(timeD)):
@@ -320,15 +322,15 @@ for f in np.arange(len(floats)): #For each float
 
 	import numpy
 	print(numpy.size(bact))
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/time'+floats[f]+'.txt', T, delimiter=",")
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/depth'+floats[f]+'.txt', depth, delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/time'+floats[f]+'.txt', T, delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/depth'+floats[f]+'.txt', depth, delimiter=",")
 
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/chl'+floats[f]+'.txt', chl, delimiter=",")
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/bbp'+floats[f]+'.txt', bbp, delimiter=",")
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/cp'+floats[f]+'.txt', cp, delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/chl'+floats[f]+'.txt', chl, delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/bbp'+floats[f]+'.txt', bbp, delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/cp'+floats[f]+'.txt', cp, delimiter=",")
 
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/bact'+floats[f]+'.txt',bact[f], delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/bact'+floats[f]+'.txt',bact[f], delimiter=",")
 
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/pico'+floats[f]+'.txt',pico[f], delimiter=",")
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/nano'+floats[f]+'.txt',nano[f], delimiter=",")
-	numpy.savetxt('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/DATA_TEXT_OUT/diat'+floats[f]+'.txt',diat[f], delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/pico'+floats[f]+'.txt',pico[f], delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/nano'+floats[f]+'.txt',nano[f], delimiter=",")
+	numpy.savetxt(init_path+'/Data/Soclim/DATA_TEXT_OUT/diat'+floats[f]+'.txt',diat[f], delimiter=",")
