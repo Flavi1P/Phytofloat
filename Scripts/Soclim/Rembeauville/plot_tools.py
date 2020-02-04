@@ -44,20 +44,20 @@ def simple_boxplot(ax,x,data,width,showdata,showmean):
 		ax.fill_between([x-width/2.,x+width/2.],[q1,q1],[q2,q2],facecolor='0.8')
 		ax.plot([x-width/2.,x+width/2.],[median,median],'-k')
 		ax.plot([x,x],[m1,m2],'-k')
-		
+
 		if showdata==True:
 			ax.plot(np.repeat(x,len(data)),data,'ok',mfc='none',zorder=25)
 		if showmean==True:
 			ax.plot(x,mean,'ok')
 	else:
-		print 'Boxplot warning = constant data as input'
+		print('Boxplot warning = constant data as input')
 	return median,mean,q1,q2
-	
+
 
 def date_axis(ax,t,months_size,fraction):
 	'''
 	Fuction to add nice date format :months and and years
-	
+
 	inputs:
 		ax: the origina axis to be formatted
 		t: the datetime vector of original data
@@ -67,7 +67,7 @@ def date_axis(ax,t,months_size,fraction):
 	#Be sure the date format is set to US
 	import locale
 	locale.setlocale(locale.LC_ALL,'en_US.UTF-8')
-	
+
 	from datetime import timedelta
 	#find the first day of the month  and first day of the year from the time array
 	first_day_month = np.unique(np.array([datetime(i.year, i.month, 1) for i in t]))
@@ -112,9 +112,9 @@ def add_labels(fig):
 
 def reg_plot(x,y,alpha,confidence,ax,color):
     '''
-    
+
     Calculates and plot a regression line + CI of regression
-    
+
     Parameters
     ----------
     x : original x data
@@ -123,7 +123,7 @@ def reg_plot(x,y,alpha,confidence,ax,color):
     confidence : if True, plot the confidence intervals as dotted lines
     ax : the axes in which the lines are plotted
     color : the color of the regressions line + CI lines (dashed by default)
-    
+
     Returns
     -------
     slope :  the slope of the regression
@@ -131,27 +131,27 @@ def reg_plot(x,y,alpha,confidence,ax,color):
     rsqd : Rsquared of the regression line
     pval : pval of the regression resulting from the F test of the full model
     mdl : model results
-    
-    '''    
-    
+
+    '''
+
     import numpy as np
     import statsmodels.api as sm
     from scipy.stats import t
-    
+
     sel = (~np.isnan(x)) & (~np.isnan(y))
     x = x[sel]
     y = y[sel]
-    
+
     #Define confidence limit and number of predicted points
     c_limit=1-alpha/2
     n_pred = 100
-    
+
     #Perform the fit and prediciton
     X = sm.add_constant(x)
     res = sm.OLS(y,X).fit()
     y_fit = res.params[0] + res.params[1]*x
     y_err = y -y_fit
-    
+
     #Calculate the appropriate t value
     mean_x = np.mean(x)			# mean of x
     n = len(x)				# number of samples in origional fit
@@ -164,15 +164,15 @@ def reg_plot(x,y,alpha,confidence,ax,color):
     #Calculate confidence intervals
     confs = tstat * np.sqrt((s_err/(n-2))*(1.0/n + (np.power((p_x-mean_x),2)/
     ((np.sum(np.power(x,2)))-n*(np.power(mean_x,2))))))
-   
+
     lower = p_y - abs(confs)
     upper = p_y + abs(confs)
 
     ax.plot(p_x,p_y,'-',color=color,zorder='top')
     if confidence == True:
-		ax.plot(p_x,lower,'--',color=color,zorder='top')
-		ax.plot(p_x,upper,'--',color=color,zorder='top')
-    
+	       ax.plot(p_x,lower,'--',color=color,zorder='top')
+	       ax.plot(p_x,upper,'--',color=color,zorder='top')
+
     rsqd = res.rsquared
     pval = res.f_pvalue
     slope = res.params[1]

@@ -12,6 +12,8 @@ from scipy import stats
 from O2sol import O2sol
 from plot_tools import *
 
+os.chdir('/home/flavien/Documents/these/Phytofloat')
+
 #Define a way to plot PLS results
 def PLS_plot(pls,ax1,ax2,scalex,scaley,xlab,ylab,colors):
 	plt.axhline(0,color='k',zorder='bottom')
@@ -30,7 +32,7 @@ def nonan(data):
 #=========================================================================================
 #Open the the microphyto phyto counts data
 #=========================================================================================
-data = np.genfromtxt('data/data_micro.csv',delimiter='\t',dtype='S')
+data = np.genfromtxt('Data/Soclim/data/data_micro.csv',delimiter='\t',dtype='S')
 
 fov = data[1,3:-1].astype('<f8') # Field of view, do not take into account TB1
 counts = data[2:,3:-1].astype('<f8') # Raw counts, do not take into account TB1
@@ -71,7 +73,7 @@ V_micro_tot = np.sum(V_micro,axis=1)
 #=========================================================================================
 #Open the cytometry data
 #=========================================================================================
-data_cyto = np.genfromtxt('data/data_cyto.csv',delimiter='\t',dtype='S')
+data_cyto = np.genfromtxt('Data/Soclim/data/data_cyto.csv',delimiter='\t',dtype='S')
 sample_cyto = data_cyto[3:,0]
 sample_sel = data_cyto[3:,1].astype('<f8')
 sample_sel = (sample_sel==1)
@@ -104,7 +106,7 @@ C_all_rel = (C_all.T/np.sum(C_all,axis=1)).T  # Relative contribution of each cl
 #Open the ctd data + poc/PON data
 #=========================================================================================
 #data = np.genfromtxt('data/data_btl.csv',delimiter='\t',dtype='S')
-data = np.genfromtxt('data/data_btl_JULIA.csv',delimiter='\t',dtype='S')
+data = np.genfromtxt('Data/Soclim/data/data_btl_JULIA.csv',delimiter='\t',dtype='S')
 
 
 sample_btl = data[1:,0]
@@ -131,7 +133,7 @@ pon = pon[sample_sel]
 
 #Optionnal : Check the corresondance between phyto samples and CTD samples
 for i in np.arange(len(sample_micro)):
-	print (ample_micro[i] + ' ' + sample_btl[i] + ' ' + sample_cyto[i])
+	print (sample_micro[i] , sample_btl[i] , sample_cyto[i], sep = "")
 
 #=========================================================================================
 # Select data : do not use oxygen saturation !!!
@@ -159,7 +161,7 @@ for i in np.arange(corr.shape[0]):
 from sklearn.cross_decomposition import PLSRegression
 pls = PLSRegression(n_components=X.shape[1],scale=False).fit(X,Y) # Maximum number of components = number of potential predictors
 
-B = pls.coefs
+B = pls.coef_
 Y_pred = pls.predict(X)
 rsqd_pls = pls.score(X,Y)
 print('\n-----------------------------\nPLS score = ', rsqd_pls)
@@ -171,7 +173,7 @@ Y_pred_all = np.reshape(Y_pred,Y_pred.size)
 for i in np.arange(len(plank_lab)):
 	rmse = np.mean((Y[:,i] - Y_pred[:,i])**2)**0.5
 	slope, intercept, r_value, p_value, std_err = stats.linregress(Y[:,i],Y_pred[:,i])
-	print plank_lab[i],'slope=',slope,' rsqd=',r_value**2,' pval=',p_value,' rmse=',rmse
+	print(plank_lab[i],'slope=',slope,' rsqd=',r_value**2,' pval=',p_value,' rmse=',rmse)
 slope, intercept, r_value_all, p_value, std_err = stats.linregress(Y_all,Y_pred_all)
 print ('All pooled','slope=', slope,'rsqd=', r_value_all**2,'pval=', p_value,'rmse=', np.mean((Y_all - Y_pred_all)**2)**0.5)
 print ('-----------------------------')
