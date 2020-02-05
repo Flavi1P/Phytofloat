@@ -196,7 +196,7 @@ for f in np.arange(len(floats)): #For each float
 		#Calculate F490 unsing Xing et al., 2011
         F_all[f][p] = F490(depth,chl[:,p],ed[:,p],100) # much deeper than Ze
 
-		#Set bio-optical values to 0 in the deep
+	    #Set bio-optical values to 0 in the deep
         chl[:,p] = chl[:,p] - np.nanmin(chl[:,p])
         bbp[:,p] = bbp[:,p] - np.nanmin(bbp[:,p])
         cp[:,p] = cp[:,p] - np.nanmin(cp[:,p])
