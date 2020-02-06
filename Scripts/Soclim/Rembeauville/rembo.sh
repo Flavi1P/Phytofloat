@@ -8,8 +8,8 @@ echo $floatID
 echo $floatWMO
 echo $dac
 
-R $floatID $floatWMO $dac --vanilla  < WMOtoRAMBOVILLE_format.R 
-python prediction_AP_VER4.py $floatID
+R $floatID $floatWMO $dac --vanilla  < WMOtoRAMBOVILLE_format.R
+python3 prediction_AP_VER4.py $floatID
 R $floatID $floatWMO $dac --vanilla < RAMBOVILLE_out_plot.R
 
 
