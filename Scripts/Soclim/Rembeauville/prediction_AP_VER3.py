@@ -194,6 +194,10 @@ for f in np.arange(len(floats)): #For each float
 #		chl[:dep_unquench,p] = np.nanmean(chl[dep_unquench-1:dep_unquench+1,p])
 
 		#Calculate F490 unsing Xing et al., 2011
+        if p == 305 : #a little trick to avoid a conflict with the different bounts of the data
+            p = 304
+        else :
+            p = p
         F_all[f][p] = F490(depth,chl[:,p],ed[:,p],100) # much deeper than Ze
 
 	    #Set bio-optical values to 0 in the deep
@@ -251,6 +255,10 @@ for f in np.arange(len(floats)): #For each float
 
 	# Predict phyto classes from the surface data--------------------------------------
     for p in np.arange(sigma.shape[1]): # For each profile
+        if p == 305 : #a little trick to avoid a conflict with the different bounts of the data
+            p = 304
+        else :
+            p = p
 
 		#calculate values within mld
         chl_int[f][p]  = np.nansum(chl[mld_sel,p])
@@ -324,7 +332,7 @@ for f in np.arange(len(floats)): #For each float
 
 
     import numpy
-    print(numpy.size(bact))
+    #print(numpy.size(bact))
     numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/time'+floats[f]+'.txt', T, delimiter=",")
     numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/depth'+floats[f]+'.txt', depth, delimiter=",")
 
