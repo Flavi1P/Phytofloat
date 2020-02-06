@@ -44,7 +44,7 @@ def scale(data):
 #==============================================================================
 # Perform PLS
 #==============================================================================
-execfile('PLS_VER3.py')
+exec(open('Scripts/Soclim/Rembeauville/PLS_VER3.py', 'rb').read())
 
 #==============================================================================
 # Declare the matrices
@@ -128,7 +128,7 @@ print(floats)
 for f in np.arange(len(floats)): #For each float
     print(f)
 #Open the data
-    datadir = '/Data/Soclim/data/'+floats+'/'
+    datadir = 'Data/Soclim/data/'+floats[f]+'/'
     timeD = np.loadtxt(datadir+'TIME.txt',dtype=int, delimiter=',')
 
     for ff in range(len(timeD)):
@@ -324,15 +324,15 @@ for f in np.arange(len(floats)): #For each float
 
     import numpy
     print(numpy.size(bact))
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/time'+floats+'.txt', T, delimiter=",")
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/depth'+floats+'.txt', depth, delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/time'+floats[f]+'.txt', T, delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/depth'+floats[f]+'.txt', depth, delimiter=",")
 
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/chl'+floats+'.txt', chl, delimiter=",")
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/bbp'+floats+'.txt', bbp, delimiter=",")
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/cp'+floats+'.txt', cp, delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/chl'+floats[f]+'.txt', chl, delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/bbp'+floats[f]+'.txt', bbp, delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/cp'+floats[f]+'.txt', cp, delimiter=",")
 
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/bact'+floats+'.txt',bact[f], delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/bact'+floats[f]+'.txt',bact[f], delimiter=",")
 
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/pico'+floats+'.txt',pico[f], delimiter=",")
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/nano'+floats+'.txt',nano[f], delimiter=",")
-    numpy.savetxt('/Data/Soclim/DATA_TEXT_OUT/diat'+floats+'.txt',diat[f], delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/pico'+floats[f]+'.txt',pico[f], delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/nano'+floats[f]+'.txt',nano[f], delimiter=",")
+    numpy.savetxt('Data/Soclim/DATA_TEXT_OUT/diat'+floats[f]+'.txt',diat[f], delimiter=",")
