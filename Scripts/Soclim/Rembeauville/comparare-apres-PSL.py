@@ -196,7 +196,7 @@ for f in np.arange(len(floats)): #For each float
 
 		#Unquench chlorophyll using the Xing et al., 2012 method
         mld_sel = (depth <= mld[f][p])
-        chl_mld_values = chl[f][mld_sel,p]
+        chl_mld_values = chl[f][np.where(mld_sel)[0]]
         dep_unquench = min(depth[np.where(chl_mld_values == np.nanmax(chl_mld_values))])
         chl[f][:dep_unquench,p] = np.nanmean(chl[f][dep_unquench-1:dep_unquench+1,p])
 
