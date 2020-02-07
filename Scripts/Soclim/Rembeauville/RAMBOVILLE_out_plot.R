@@ -31,7 +31,7 @@ floats  <- uf[2]
 WMO  <- uf[3]
 DAC  <- uf[4]
 
-
+setwd('/home/flavien/Documents/these/Phytofloat')
 
 #WMO <- c('6901585','6901583','6901004','6902739','6902738')
 #floats = c('049b','036b','037c','107c','104c')

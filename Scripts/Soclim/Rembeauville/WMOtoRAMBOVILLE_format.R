@@ -11,7 +11,7 @@ library(zoo)
 
 
 
-
+setwd('/home/flavien/Documents/these/Phytofloat')
 uf=commandArgs()
 
 floats  <- uf[2]
