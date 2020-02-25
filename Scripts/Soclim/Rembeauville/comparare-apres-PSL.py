@@ -65,7 +65,7 @@ ox = []
 ox_sat = []
 aou = []
 sigma = []
-chl = []
+
 bbp = []
 cp = []
 par = []
@@ -107,6 +107,18 @@ dep_sel = (depth<250)
 #==============================================================================
 # Open the data and calculate F490
 #==============================================================================
+
+
+sigma_vec = []
+for f in np.arange(len(floats)):
+    datadir = 'Data/Soclim/data/'+floats[f]+'/'
+    sigma=np.loadtxt(datadir+'SAL.txt',dtype=float, delimiter=',')
+    sigma_vec = np.append(sigma_vec, sigma[f].shape[0])
+
+print(sigma_vec)
+max_sigma = np.amax(sigma_vec)
+
+chl = [len(floats), 3000, max_sigma]
 #Start the loop for each float
 print(floats)
 for f in np.arange(len(floats)): #For each float
