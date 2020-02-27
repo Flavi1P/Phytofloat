@@ -31,17 +31,17 @@ floats  <- uf[2]
 WMO  <- uf[3]
 DAC  <- uf[4]
 
-#WMO <- c('6901585','6901583','6901004','6902739','6902738')
-#floats = c('049b','036b','037c','107c','104c')
-floats = c('048b')
+WMO <- c('6901585','6901583','6901004','6902739','6902738')
+floats = c('049b','036b','037c','107c','104c')
+#floats = c('048b')
 #floats = c('049b')
-floats <- '107c'
+#floats <- '107c'
 for (i in floats) {
-pdf(file= paste("/var/www/oao/bioargo/PHP/AP/REMBAU/COMP_",i,".pdf",sep=""),onefile=TRUE)
+pdf(file= paste("Output/",i,".pdf",sep=""),onefile=TRUE)
 #jpeg(file= paste("/var/www/oao/bioargo/PHP/AP/REMBAU/COMP_",i,".jpeg",sep="")  , width = 3000, height = 3000 )
 par(mfrow = c(4, 4))  # 3 rows and 2 columns
 
-datadir =  paste('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/data/',i,"/", sep='')
+datadir =  paste('Data/Soclim/data/',i,"/", sep='')
 
 A<-read.table(paste(datadir,"SAL.txt",sep=""),sep="," )
 B<-read.table(paste(datadir,"CHLA.txt",sep=""),sep="," )
@@ -65,7 +65,7 @@ AH<-npyLoad(paste(datadir,"PAR.npy",sep=""), dotranspose=FALSE)
 AI<-npyLoad(paste(datadir,"LON.npy",sep=""), dotranspose=FALSE)
 AJ<-npyLoad(paste(datadir,"LAT.npy",sep=""), dotranspose=FALSE)
 
-#for (iVV in seq(1,dim(B)[2])) plot(B[,iVV],col="red")
+#for (iVV in seq(1,dim(B)[2])) plot(B[,iVV],col="red")      
 #for (iVV in seq(1,dim(AB)[2])) plot(AB[,iVV])
 
 
@@ -77,5 +77,3 @@ dev.off()
 
 
 }
-
-

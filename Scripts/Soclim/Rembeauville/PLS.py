@@ -133,7 +133,7 @@ pon = pon[sample_sel]
 
 #Optionnal : Check the corresondance between phyto samples and CTD samples
 for i in np.arange(len(sample_micro)):
-	print (sample_micro[i] , sample_btl[i] , sample_cyto[i], sep = "")
+	print (sample_micro[i] , sample_btl[i] , sample_cyto[i])
 
 #=========================================================================================
 # Select data : do not use oxygen saturation !!!

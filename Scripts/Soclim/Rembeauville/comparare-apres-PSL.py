@@ -1,5 +1,3 @@
-
-
 # -*- coding: utf-8 -*-
 import os
 import numpy as np
@@ -14,6 +12,7 @@ from plot_tools import *
 from datetime import datetime, date, time
 import pdb
 
+from sys import exit
 os.chdir('/home/flavien/Documents/these/Phytofloat')
 
 plt.interactive(True)
@@ -75,6 +74,7 @@ chl_spikes = []
 chl_bbp = []
 chl_cp = []
 bbp_cp = []
+chl = []
 
 bact = []
 pico = []
@@ -100,8 +100,10 @@ a = []
 b = []
 
 threshold = 0.03 # Density crierion (De Boyer Montégut et al., 2004)
-depth = np.arange(1001)
+# depth = np.arange(1001)
+depth = np.arange(1000)
 dep_sel = (depth<250)
+
 
 
 #==============================================================================
@@ -109,16 +111,16 @@ dep_sel = (depth<250)
 #==============================================================================
 
 
-sigma_vec = []
-for f in np.arange(len(floats)):
-    datadir = 'Data/Soclim/data/'+floats[f]+'/'
-    sigma=np.loadtxt(datadir+'SAL.txt',dtype=float, delimiter=',')
-    sigma_vec = np.append(sigma_vec, sigma[f].shape[0])
+#sigma_vec = []
+#for f in np.arange(len(floats)): #pour chaque flotteur, trouver le nombre de profil, le mettre dans un vecteur, et ressortir le nombre maximum de profile pour un flotteur
+#    datadir = 'Data/Soclim/data/'+floats[f]+'/'
+#    sigma=np.loadtxt(datadir+'SAL.txt',dtype=float, delimiter=',')
+#    sigma_vec = np.append(sigma_vec, sigma[f].shape[0])
+# print(sigma_vec)
+# max_sigma = np.amax(sigma_vec)
 
-print(sigma_vec)
-max_sigma = np.amax(sigma_vec)
 
-chl = [len(floats), 3000, max_sigma]
+#chl = [len(floats), 3000, max_sigma]
 #Start the loop for each float
 print(floats)
 for f in np.arange(len(floats)): #For each float
@@ -208,9 +210,10 @@ for f in np.arange(len(floats)): #For each float
 
 		#Unquench chlorophyll using the Xing et al., 2012 method
         mld_sel = (depth <= mld[f][p])
-        chl_mld_values = chl[f][np.where(mld_sel)[0]]
+        chl_mld_values = chl[f][np.where(mld_sel)[p]]
         dep_unquench = min(depth[np.where(chl_mld_values == np.nanmax(chl_mld_values))])
-        chl[f][:dep_unquench,p] = np.nanmean(chl[f][dep_unquench-1:dep_unquench+1,p])
+        # chl[f][:dep_unquench,p] = np.nanmean(chl[f][dep_unquench-1:dep_unquench+1,p])
+        chl[:dep_unquench,p] = np.nanmean(chl[dep_unquench-1:dep_unquench+1,p])
 
 		#Calculate F490 unsing Xing et al., 2011
         F_all[f][p] = F490(depth,chl[f][:,p],ed[f][:,p],100) # much deeper than Ze
