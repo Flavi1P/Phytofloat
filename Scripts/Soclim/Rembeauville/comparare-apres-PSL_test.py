@@ -11,6 +11,7 @@ import pandas as pd
 from plot_tools import *
 from datetime import datetime, date, time
 import pdb
+import matplotlib.font_manager
 
 from sys import exit
 os.chdir('/home/flavien/Documents/these/Phytofloat')
@@ -45,6 +46,7 @@ exec(open('Scripts/Soclim/Rembeauville/PLS.py').read())
 # Declare the matrices
 #==============================================================================
 
+np.seterr(divide = 'ignore', invalid = 'ignore')
 
 floats = ['049b','036b','037c','107c','104c']
 floatsWMO = ['6901585','6901583','037c','107c','104c']
@@ -123,23 +125,27 @@ dep_sel = (depth<250)
 #chl = [len(floats), 3000, max_sigma]
 #Start the loop for each float
 print(floats)
+time = [[],[],[],[],[]]
+
 for f in np.arange(len(floats)): #For each float
 
 #Open the data
     datadir = 'Data/Soclim/data/'+floats[f]+'/'
     timeD = np.loadtxt(datadir+'TIME.txt',dtype=int, delimiter=',')
+    b = []
 
     for ff in range(len(timeD)):
         a=str(timeD[ff,0])+'-'+str(timeD[ff,1])+'-'+str(timeD[ff,2])+'-'+str(timeD[ff,3])+'-'+str(timeD[ff,4])
         b.append(datetime.strptime(a, "%Y-%m-%d-%H-%M"))
-    time=np.transpose(b)
+
+    time[f] = (np.transpose(b))
     print('toto2')
 
 
 
 
     print(np.squeeze(np.asarray(time)))
-    print(np.asarray((time).ravel()))
+    #print(np.asarray((time).ravel()))
 
 
 
@@ -181,7 +187,7 @@ for f in np.arange(len(floats)): #For each float
 #	chl_spikes[f][chl_spikes[f]>0.05] = np.nan # threshold for acceptable data -> See Nathan for a justification
 
     mld.append(np.repeat(np.nan,sigma[f].shape[0])) #Empy array for MLD
-    ox_sat.append(np.empty(sigma[f].shape[0])) ; ox_sat[] = np.nan
+    ox_sat.append(np.loadtxt(datadir+'OX.txt',dtype=float, delimiter=','))
     aou.append(np.copy(ox_sat[f]))
     F_all.append(np.repeat(np.nan,bbp[f].shape[0]))
     print(sigma[f])
@@ -239,6 +245,7 @@ for f in np.arange(len(floats)): #For each float
     temp_mld.append(np.repeat(np.nan,chl[f].shape[1]))
     bbp_mld.append(np.repeat(np.nan,bbp[f].shape[1]))
     par_mld.append(np.repeat(np.nan,bbp[f].shape[1]))
+
 
 	#Calculate the ratio of bio-optical data
     chl_bbp.append(chl[f]/bbp[f])
@@ -326,7 +333,7 @@ for f in np.arange(len(floats)):
     ax[0].set_title(floats[f])
 
 	# Plot Chlorophyll
-    ctot_plot = contour_plot_chl(ax[0],T,depth,chl[f])
+    ctot_plot = contour_plot_chl(ax[0], T, depth, chl[f])
     pos = ax[0].get_position()
     cbar_ax = fig.add_axes([pos.x1 +0.02, pos.y0,0.02, pos.height])
     cbar = plt.colorbar(ctot_plot,cax = cbar_ax,ticks = [0,.5,1,1.5])
