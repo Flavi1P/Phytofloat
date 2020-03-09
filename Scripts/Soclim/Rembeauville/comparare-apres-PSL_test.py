@@ -263,7 +263,7 @@ for f in np.arange(len(floats)): #For each float
     diat.append(np.copy(bact[f]))
 
 	# Predict phyto classes from the surface data--------------------------------------
-    for p in np.arange(sigma[f].shape[0]): # For each profile
+    for p in np.arange(len(chl[f][0]) - 1): # For each profile
 
 		#calculate values within mld
         chl_int[f][p]  = np.nansum(chl[f][mld_sel,p])
