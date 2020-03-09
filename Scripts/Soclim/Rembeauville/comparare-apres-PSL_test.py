@@ -367,6 +367,6 @@ for f in np.arange(len(floats)):
 
 
 #Save the figure
-#	figname = '/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/fig/png/'+floats[f]+'.png'
-#	plt.savefig(figname,dpi=300)
-#	plt.close()
+#    plt.show()
+#    plt.savefig(figname,dpi=300)
+#    plt.close()
