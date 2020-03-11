@@ -14,19 +14,19 @@ library(zoo)
 setwd('/home/flavien/Documents/these/Phytofloat')
 uf=commandArgs()
 
-floats  <- uf[2]
-WMO  <- uf[3]
-DAC  <- uf[4]
+# floats  <- uf[2]
+# WMO  <- uf[3]
+# DAC  <- uf[4]
 
 
-#WMO <- c('6901474')
-#DAC <- c("coriolis")
-#floats = c('006b')
+# WMO <- c('6901583')
+# DAC <- c("coriolis")
+# floats = c('036b')
 
 
-#WMO <- c('6901585','6901583','6901004','6902739','6902738')
+WMO <- c('6901585','6901583','6901004','6902739','6902738')
 #DAC <- c("coriolis","coriolis","coriolis","coriolis","coriolis")
-#floats = c('049b','036b','037c','107c','104c')
+floats = c('049b','036b','037c','107c','104c')
 
 #WMO <- c('6901585')
 #DAC <- ("coriolis")
@@ -37,14 +37,16 @@ DAC  <- uf[4]
 ii <- 0
 listWMO <- unique(WMO)
 for (WMOWMO in listWMO) {
+WMOWMO <- listWMO
 print(WMOWMO)
 AA <- NULL
 
 ii <- ii + 1
-GDAC <- DAC[which(  WMO  == WMOWMO)  [1]]
+#GDAC <- DAC[which(  WMO  == WMOWMO)  [1]]
 print(WMOWMO)
 
-prof_bio_core=paste("/home/admt/GDAC/",GDAC,"/",WMOWMO,"/",WMOWMO,"_Mprof.nc",sep="")
+#prof_bio_core=paste("/home/admt/GDAC/",GDAC,"/",WMOWMO,"/",WMOWMO,"_Mprof.nc",sep="")
+prof_bio_core=paste("Data/Soclim/raw/",WMOWMO,'_Mprof.nc',sep="")
 print(WMOWMO)
 
 if (file.exists(prof_bio_core) == TRUE) {  
@@ -223,7 +225,7 @@ densiteRHO[,ivv] <- swSigmaTheta(as.double(PSAL_2[,ivv]),as.double(TEMP_2[,ivv])
 
 CP_3 <- NULL
 
-datadir =  paste('/home/admt/PROGRAM_AP/CODE_REMBAUVILLLE/data/',floats[ii],"/", sep='')
+datadir =  paste('Data/Soclim/data_new/',floats[ii],"/", sep='')
 write.table(PSAL_2, paste(datadir,"SAL.txt",sep=""),quote = FALSE, sep = ",",row.names = FALSE,col.names = FALSE)
 write.table(CHL_2, paste(datadir,"CHLA.txt",sep=""),quote = FALSE, sep = ",",row.names = FALSE,col.names = FALSE)
 write.table(TEMP_2, paste(datadir,"TEMP.txt",sep=""),quote = FALSE, sep = ",",row.names = FALSE,col.names = FALSE)
