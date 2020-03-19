@@ -106,7 +106,7 @@ C_all_rel = (C_all.T/np.sum(C_all,axis=1)).T  # Relative contribution of each cl
 #Open the ctd data + poc/PON data
 #=========================================================================================
 #data = np.genfromtxt('data/data_btl.csv',delimiter='\t',dtype='S')
-data = np.genfromtxt('Data/Soclim/data/data_btl_JULIA.csv',delimiter='\t',dtype='S')
+data = np.genfromtxt('Data/Soclim/data/data_btl.csv',delimiter='\t',dtype='S')
 
 
 sample_btl = data[1:,0]

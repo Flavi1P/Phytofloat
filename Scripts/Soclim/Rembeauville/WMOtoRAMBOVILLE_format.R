@@ -1,7 +1,7 @@
 ###########################################################################################
 # Routine developpee par C. Schmechtig Antoine Poteau et Henry Bittig
 #
-# March 2016 : Read Coriolis Data 
+# March 2016 : Read Coriolis Data
 #############################################################################################
 library(marmap)
 require(oce)
@@ -36,7 +36,7 @@ floats = c('049b','036b','037c','107c','104c')
 
 ii <- 0
 listWMO <- unique(WMO)
-for (WMOWMO in listWMO) {
+for (wmo in listWMO) {
 WMOWMO <- listWMO
 print(WMOWMO)
 AA <- NULL
@@ -46,11 +46,11 @@ ii <- ii + 1
 print(WMOWMO)
 
 #prof_bio_core=paste("/home/admt/GDAC/",GDAC,"/",WMOWMO,"/",WMOWMO,"_Mprof.nc",sep="")
-prof_bio_core=paste("Data/Soclim/raw/",WMOWMO,'_Mprof.nc',sep="")
-print(WMOWMO)
+prof_bio_core=paste("Data/Soclim/raw/",wmo,'_Mprof.nc',sep="")
+print(wmo)
 
-if (file.exists(prof_bio_core) == TRUE) {  
-prof_bio_core=open.nc(prof_bio_core,readunlim=FALSE) 
+if (file.exists(prof_bio_core) == TRUE) {
+prof_bio_core=open.nc(prof_bio_core,readunlim=FALSE)
 PARAM <-  var.get.nc(prof_bio_core,"PARAMETER")
 PARAM_MODE <-  var.get.nc(prof_bio_core,"PARAMETER_DATA_MODE")
 PRES=var.get.nc(prof_bio_core,"PRES")
@@ -106,7 +106,7 @@ PAR=DOWNWELLING_PAR[,-sans]
 
 ED490=ED490[,-sans]
 
- 
+
 
 
 print('ffff')
@@ -187,7 +187,7 @@ if (length(which(JULD == iiv & is.na(colMeans(CP,na.rm=T))==FALSE)) > 0 & length
 TEMP_2 <-    cbind(TEMP_2,TEMP_INT[,which(JULD == iiv & is.na(colMeans(TEMP_INT,na.rm=T))==FALSE)])
 PSAL_2 <-    cbind(PSAL_2,PSAL_INT[,which(JULD == iiv & is.na(colMeans(PSAL_INT,na.rm=T))==FALSE)])
 CHL_2 <-    cbind(CHL_2,CHL_INT[,which(JULD == iiv & is.na(colMeans(CHL_INT,na.rm=T))==FALSE)])
-BBP_2 <-  cbind(BBP_2,BBP_INT[,which(JULD == iiv & is.na(colMeans(BBP_INT,na.rm=T))==FALSE)])
+BBP_2 <-  cbind(BBP_2,BBP_INT[,which(JULD == iiv & is.na(colMeans(CHL_INT,na.rm=T))==FALSE)])
 CP_2 <-  cbind(CP_2,CP_INT[,which(JULD == iiv & is.na(colMeans(CP_INT,na.rm=T))==FALSE)])
 PAR_2 <-  cbind(PAR_2,PAR_INT[,which(JULD == iiv & is.na(colMeans(PAR_INT,na.rm=T))==FALSE)])
 ED_2 <-  cbind(ED_2,ED490_INT[,which(JULD == iiv & is.na(colMeans(ED490_INT,na.rm=T))==FALSE)])

@@ -130,7 +130,8 @@ time = [[],[],[],[],[]]
 for f in np.arange(len(floats)): #For each float
 
 #Open the data
-    datadir = 'Data/Soclim/data/'+floats[f]+'/'
+    datadir = 'Data/Soclim/data_new/'+floats[f]+'/'
+    datadir2 = 'Data/Soclim/data/'+floats[f]+'/'
     timeD = np.loadtxt(datadir+'TIME.txt',dtype=int, delimiter=',')
     b = []
 
@@ -153,7 +154,7 @@ for f in np.arange(len(floats)): #For each float
 
     time2  = []
 
-    time2.append(np.load(datadir+'TIME.npy', allow_pickle = True, encoding = 'bytes'))
+    time2.append(np.load(datadir2+'TIME.npy', allow_pickle = True, encoding = 'bytes'))
 
     print('toto3')
     print(((time2)))
@@ -181,10 +182,10 @@ for f in np.arange(len(floats)): #For each float
     par.append(np.loadtxt(datadir+'PAR.txt',dtype=float, delimiter=','))
     ed.append(np.loadtxt(datadir+'ED490.txt',dtype=float, delimiter=','))
 
-#	bbp_spikes.append(np.load(datadir+'BBP_SPIKES.npy'))
-#	chl_spikes.append(np.load(datadir+'CHL_SPIKES.npy'))
-#	bbp_spikes[f][bbp_spikes[f]>0.048] = np.nan # threshold for acceptable data -> See Nathan for a justification
-#	chl_spikes[f][chl_spikes[f]>0.05] = np.nan # threshold for acceptable data -> See Nathan for a justification
+    bbp_spikes.append(np.load(datadir2+'BBP_SPIKES.npy'))
+    chl_spikes.append(np.load(datadir2+'CHL_SPIKES.npy'))
+    bbp_spikes[f][bbp_spikes[f]>0.048] = np.nan # threshold for acceptable data -> See Nathan for a justification
+    chl_spikes[f][chl_spikes[f]>0.05] = np.nan # threshold for acceptable data -> See Nathan for a justification
 
     mld.append(np.repeat(np.nan,sigma[f].shape[0])) #Empy array for MLD
     ox_sat.append(np.loadtxt(datadir+'OX.txt',dtype=float, delimiter=','))
@@ -206,7 +207,7 @@ for f in np.arange(len(floats)): #For each float
 #		aou = (O2sol(temp,sal)*dens) - ox
 
 		#Calculate MLD
-        sigma_ref = np.nanmean(sigma[19:21,p])
+        sigma_ref = np.nanmean(sigma[9:11,p])
         dep_val = depth[np.where(sigma[:,p]> sigma_ref + threshold)]
         if any(dep_val):
             mld[f][p] = min(dep_val)
