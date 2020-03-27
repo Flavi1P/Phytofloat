@@ -84,8 +84,8 @@ V_cyto = abund_cyto*biovol_cyto
 C_cyto = abund_cyto*carbon_cyto/12/1e6 # Convert pgC to  �molC
 
 #sum all pico (proc+syn+'pico')
-V_bact = V_cyto[:,0] ; V_pico = np.sum(V_cyto[:,1:4],axis=1) ; V_nano = V_cyto[:,-1]
-C_bact = C_cyto[:,0] ; C_pico = np.sum(C_cyto[:,1:4],axis=1) ; C_nano = C_cyto[:,-1]
+V_bact = V_cyto[:,0] ; V_pico = np.sum(V_cyto[:,1:3],axis=1) ; V_nano = V_cyto[:,4]
+C_bact = C_cyto[:,0] ; C_pico = np.sum(C_cyto[:,1:3],axis=1) ; C_nano = C_cyto[:,4]
 
 #=========================================================================================
 #Merge phyto data and Calculate the relative contribution of each class to total biovolume and carbon
